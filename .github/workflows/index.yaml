@@ -28,7 +28,7 @@ jobs:
           npx tsx cli/XMLtoJSON.ts ./lwm2m-registry ./lwm2m-registry-json
 
       - name: Get RangeEumeration values
-        run: npx tsx ./src/TypeScript/getRangeEnumerationValues
+        run: npx tsx ./getRangeEnumerationValues.ts
 
       - name: Make sure file with values M2M 'friendly' compiles
         run: npx tsc ./values/m2mFriendly.ts
