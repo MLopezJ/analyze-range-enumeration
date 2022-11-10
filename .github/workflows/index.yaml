@@ -1,0 +1,40 @@
+name: Compile LwM2M type definitions
+
+on:
+  push:
+    branches:
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16.x"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Clone LwM2M object registry
+        run: git clone https://github.com/OpenMobileAlliance/lwm2m-registry.git --depth 1
+
+      - name: From XML to JSON
+        run: |
+          mkdir lwm2m-registry-json
+          npx tsx cli/XMLtoJSON.ts ./lwm2m-registry ./lwm2m-registry-json
+
+      - name: Get RangeEumeration values
+        run: npx tsx ./src/TypeScript/createTypeboxDef
+
+      - name: Make sure file with values M2M 'friendly' compiles
+        run: npx tsc ./values/m2mFriendly.ts
+
+      - name: Make sure file with values not M2M 'friendly' compiles
+        run: npx tsc ./values/notM2mFriendly.ts
+
+      - name: Make sure file with empty values compiles
+        run: npx tsc ./values/rangeEnumerationNotDefined.ts
