@@ -31,10 +31,10 @@ jobs:
         run: npx tsx ./getRangeEnumerationValues.ts
 
       - name: Make sure file with values M2M 'friendly' compiles
-        run: npx tsc ./values/m2mFriendly.ts
+        run: npx tsc ./values/items/m2mFriendly.ts
 
       - name: Make sure file with values not M2M 'friendly' compiles
-        run: npx tsc ./values/notM2mFriendly.ts
+        run: npx tsc ./values/items/notM2mFriendly.ts
 
       - name: Make sure file with empty values compiles
         run: npx tsc ./values/rangeEnumerationNotDefined.ts

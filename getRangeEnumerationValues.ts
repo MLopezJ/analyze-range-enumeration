@@ -1,5 +1,7 @@
 //About: get how many of the objects are multiple instance and how many are single instance
 
+// TODO: move to src
+
 import path from "path";
 import fs from "fs";
 import { readFile, writeFile } from "fs/promises";
@@ -71,6 +73,7 @@ const readJson = async (element: any) => {
     const json = JSON.parse(await readFile(jsonPath, "utf-8"));
 
     const objectId = json.LWM2M.Object[0].ObjectID[0];
+    // TODO: create method
     json.LWM2M.Object[0].Resources[0].Item.map(
       (element: {
         ATTR: { ID: string };
