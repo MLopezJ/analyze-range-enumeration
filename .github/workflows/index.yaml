@@ -37,4 +37,7 @@ jobs:
         run: npx tsc ./values/items/notM2mFriendly.ts
 
       - name: Make sure file with empty values compiles
-        run: npx tsc ./values/rangeEnumerationNotDefined.ts
+        run: npx tsc ./values/items/rangeEnumerationNotDefined.ts
+
+      - name: Group by object the 'not M2M friendly' items
+        run: npx tsc cli/executeGroupByObject ./values/items/notM2mFriendly.ts ./values/group/notM2mFriendly.ts
