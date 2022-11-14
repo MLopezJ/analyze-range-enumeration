@@ -28,13 +28,21 @@ jobs:
           npx tsx cli/XMLtoJSON.ts ./lwm2m-registry ./lwm2m-registry-json
 
       - name: Get RangeEumeration values
-        run: npx tsx ./getRangeEnumerationValues.ts
+        run: |
+          mkdir ./values/items
+          npx tsx ./getRangeEnumerationValues.ts
 
       - name: Make sure file with values M2M 'friendly' compiles
-        run: npx tsc ./values/m2mFriendly.ts
+        run: npx tsc ./values/items/m2mFriendly.ts
 
       - name: Make sure file with values not M2M 'friendly' compiles
-        run: npx tsc ./values/notM2mFriendly.ts
+        run: npx tsc ./values/items/notM2mFriendly.ts
 
       - name: Make sure file with empty values compiles
-        run: npx tsc ./values/rangeEnumerationNotDefined.ts
+        run: npx tsc ./values/items/rangeEnumerationNotDefined.ts
+
+      - name: Group by object the 'not M2M friendly' items
+        run: |
+          mkdir ./values/group
+          touch ./values/group/notM2mFriendly.ts
+          npx tsx cli/executeGroupByObject ../values/items/notM2mFriendly.ts ./values/group/notM2mFriendly.ts

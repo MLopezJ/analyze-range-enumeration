@@ -1,5 +1,7 @@
 //About: get how many of the objects are multiple instance and how many are single instance
 
+// TODO: move to src
+
 import path from "path";
 import fs from "fs";
 import { readFile, writeFile } from "fs/promises";
@@ -71,6 +73,7 @@ const readJson = async (element: any) => {
     const json = JSON.parse(await readFile(jsonPath, "utf-8"));
 
     const objectId = json.LWM2M.Object[0].ObjectID[0];
+    // TODO: create method
     json.LWM2M.Object[0].Resources[0].Item.map(
       (element: {
         ATTR: { ID: string };
@@ -114,8 +117,8 @@ fs.readdir(dirpath, async (err, files) => {
   }
 
   await writeFile(
-    "./values/rangeEnumerationNotDefined.ts",
-    `const rangeEnumerationNotDefined = [${rangeEnumerationNotDefined.map(
+    "./values/items/rangeEnumerationNotDefined.ts",
+    `export const list = [${rangeEnumerationNotDefined.map(
       (element) => {
         return `{ objectId: "${element.objectId}", itemId: "${
           element.itemId
@@ -127,8 +130,8 @@ fs.readdir(dirpath, async (err, files) => {
   );
 
   await writeFile(
-    "./values/m2mFriendly.ts",
-    `const m2mFriendly = [${m2mFriendly.map((element) => {
+    "./values/items/m2mFriendly.ts",
+    `export const list = [${m2mFriendly.map((element) => {
       return `{ objectId: "${element.objectId}", itemId: "${
         element.itemId
       }", rangeEnumeration: "${element.rangeEnumeration}", unit:  ${
@@ -138,8 +141,8 @@ fs.readdir(dirpath, async (err, files) => {
   );
 
   await writeFile(
-    "./values/notM2mFriendly.ts",
-    `const notM2mFriendly = [${notM2mFriendly.map((element) => {
+    "./values/items/notM2mFriendly.ts",
+    `export const list = [${notM2mFriendly.map((element) => {
       return `{ objectId: "${element.objectId}", itemId: "${
         element.itemId
       }", rangeEnumeration: "${element.rangeEnumeration}", unit:  ${
