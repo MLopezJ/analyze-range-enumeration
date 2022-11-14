@@ -3,7 +3,7 @@
   "devDependencies": {
     "@nordicsemiconductor/eslint-config-asset-tracker-cloud-typescript": "10.0.47",
     "@types/xml2js": "^0.4.11",
-    "tsx": "^3.11.0",
+    "tsx": "^3.12.1",
     "typescript": "^4.8.4",
     "xml2js": "^0.4.23"
   },
