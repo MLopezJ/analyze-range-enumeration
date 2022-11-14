@@ -45,4 +45,4 @@ jobs:
         run: |
           mkdir ./values/group
           touch ./values/group/notM2mFriendly.ts
-          npx tsc cli/executeGroupByObject values/items/notM2mFriendly.ts values/group/notM2mFriendly.ts
+          npx tsx cli/executeGroupByObject values/items/notM2mFriendly.ts values/group/notM2mFriendly.ts
